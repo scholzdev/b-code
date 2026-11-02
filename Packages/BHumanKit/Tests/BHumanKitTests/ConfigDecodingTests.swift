@@ -4,6 +4,7 @@
 //
 
 import XCTest
+import Foundation
 @testable import BHumanKit
 
 final class ConfigDecodingTests: XCTestCase {

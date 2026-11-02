@@ -85,7 +85,7 @@ public enum RobotStatusParser {
         return Report(
             batteryPercent: isActive ? percent : nil,
             temperatureCelsius: isActive && temperature > 0 ? temperature : nil,
-            logCount: max(logs - (isActive ? 1 : 0), 0),
+            logCount: isActive ? max(logs, 1) - 1 : max(logs, 0),
             hasNewCalibration: fields[3] == "yes",
             service: service,
             hasCrashDump: fields[5] == "yes"

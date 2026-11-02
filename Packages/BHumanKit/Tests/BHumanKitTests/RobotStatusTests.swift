@@ -4,6 +4,7 @@
 //
 
 import XCTest
+import Foundation
 @testable import BHumanKit
 
 final class RobotStatusTests: XCTestCase {
@@ -103,6 +104,11 @@ final class RobotStatusTests: XCTestCase {
 
     func testLogCountNeverGoesNegative() throws {
         let report = try XCTUnwrap(RobotStatusParser.parseReport("0.9 40 0 no active no"))
+        XCTAssertEqual(report.logCount, 0)
+    }
+
+    func testExtremeLogCountDoesNotTrap() throws {
+        let report = try XCTUnwrap(RobotStatusParser.parseReport("0.9 40 -9223372036854775808 no active no"))
         XCTAssertEqual(report.logCount, 0)
     }
 
