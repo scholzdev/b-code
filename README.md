@@ -1,14 +1,14 @@
 <p align="center">
   <img src="https://github.com/CodeEditApp/CodeEdit/blob/main/.github/CodeEdit-Icon-128@2x.png?raw=true" height="128">
-  <h1 align="center">CodeEdit for macOS</h1>
+  <h1 align="center">b-code for macOS</h1>
 </p>
 
 
 <p align="center">
-  <a aria-label="Follow CodeEdit on X" href="https://x.com/CodeEditApp" target="_blank">
+  <a aria-label="Follow b-code on X" href="https://x.com/CodeEditApp" target="_blank">
     <img alt="" src="https://img.shields.io/badge/Follow%20@CodeEditApp-black.svg?style=for-the-badge&logo=X">
   </a>
-  <a aria-label="Follow CodeEdit on BlueSky" href="https://bsky.app/profile/codeedit.app" target="_blank">
+  <a aria-label="Follow b-code on BlueSky" href="https://bsky.app/profile/codeedit.app" target="_blank">
     <img alt="" src="https://img.shields.io/badge/Follow%20@codeedit.app-black.svg?style=for-the-badge&logo=bluesky">
   </a>
   <a aria-label="Join the community on Discord" href="https://discord.gg/vChUXVf9Em" target="_blank">
@@ -16,7 +16,11 @@
   </a>
 </p>
 
-CodeEdit is a code editor built by the community, for the community, written entirely and unapologetically for macOS. Features include syntax highlighting, code completion, project find and replace, snippets, terminal, task running, debugging, git integration, code review, extensions, and more.
+> [!NOTE]
+> **b-code is a fork of [CodeEdit](https://github.com/CodeEditApp/CodeEdit)** (MIT licensed, see [LICENSE.md](LICENSE.md)), being turned into an Xcode-like IDE for the B-Human RoboCup team.
+> Links, badges, release feeds, the contributor list and the text below come from the upstream project and have not been adapted yet.
+
+b-code is a code editor built by the community, for the community, written entirely and unapologetically for macOS. Features include syntax highlighting, code completion, project find and replace, snippets, terminal, task running, debugging, git integration, code review, extensions, and more.
 
 <img width="1012" alt="github-banner" src="https://user-images.githubusercontent.com/806104/194004176-3143d19f-1ad9-449c-bd41-8c4f9998f44b.png">
 
@@ -28,7 +32,7 @@ CodeEdit is a code editor built by the community, for the community, written ent
 [![Discord Badge](https://img.shields.io/discord/951544472238444645?color=5865F2&label=Discord&logo=discord&logoColor=white&style=flat-square)](https://discord.gg/vChUXVf9Em)
 
 > [!IMPORTANT]
-> CodeEdit is currently in development and not yet recommended for production use, however you can take part in shaping it's future by test-driving [pre-release versions](https://github.com/CodeEditApp/CodeEdit/releases) and [submitting an issue](https://github.com/CodeEditApp/CodeEdit/issues) to let us know what you think.
+> b-code is currently in development and not yet recommended for production use, however you can take part in shaping it's future by test-driving [pre-release versions](https://github.com/CodeEditApp/CodeEdit/releases) and [submitting an issue](https://github.com/CodeEditApp/CodeEdit/issues) to let us know what you think.
 
 ## Table of Contents
 
@@ -52,17 +56,17 @@ This raised the question "what if such an editor existed?", a question that led 
 
 ## Mission
 
-It is our commitment to keep CodeEdit open source and free forever, supported by the community.
+It is our commitment to keep b-code open source and free forever, supported by the community.
 
-<img width="1012" alt="TextEdit plus Xcode equals CodeEdit" src="https://github.com/CodeEditApp/CodeEdit/assets/806104/a9379df0-ab26-4ef8-98a9-2e2b4bd8c7b4">
+<img width="1012" alt="TextEdit plus Xcode equals b-code" src="https://github.com/CodeEditApp/CodeEdit/assets/806104/a9379df0-ab26-4ef8-98a9-2e2b4bd8c7b4">
 
 Our goal is to maintain a lightweight experience, similar to TextEdit, while being able to scale up to a more feature-rich experience, comparable to Xcode, as necessary.
 
-We strive to remain true to Apple's human interface guidelines and development patterns, ensuring CodeEdit looks and feels like an application developed by Apple themselves, which includes a meticulous attention to detail.
+We strive to remain true to Apple's human interface guidelines and development patterns, ensuring b-code looks and feels like an application developed by Apple themselves, which includes a meticulous attention to detail.
 
 ## Community
 
-Join our growing community on [Discord](https://discord.gg/vChUXVf9Em) and [GitHub Discussions](https://github.com/orgs/CodeEditApp/discussions) where we discuss and collaborate on all things CodeEdit. Don't be shy, jump right in and be part of the discussion!
+Join our growing community on [Discord](https://discord.gg/vChUXVf9Em) and [GitHub Discussions](https://github.com/orgs/CodeEditApp/discussions) where we discuss and collaborate on all things b-code. Don't be shy, jump right in and be part of the discussion!
 
 > [!NOTE]
 > We hold a weekly meetup on Discord **every Saturday at 3pm UTC** where we discuss latests development, feature requests, goals, and priorities.
@@ -71,7 +75,7 @@ Join our growing community on [Discord](https://discord.gg/vChUXVf9Em) and [GitH
 > 
 ## Activity
 
-<img src="https://repobeats.axiom.co/api/embed/acd5eeb654fc98f6ffbce26b09fd0e3603edf1fd.svg" alt="CodeEdit Repository Activity" width="100%" />
+<img src="https://repobeats.axiom.co/api/embed/acd5eeb654fc98f6ffbce26b09fd0e3603edf1fd.svg" alt="b-code Repository Activity" width="100%" />
 
 ## Contributing
 
@@ -214,7 +218,7 @@ For issues we want to focus on that are most relevant at any given time, please 
 
 ## Sponsors
 
-Support CodeEdit's development by [becoming a sponsor](https://github.com/sponsors/CodeEditApp).
+Support b-code's development by [becoming a sponsor](https://github.com/sponsors/CodeEditApp).
 
 <a title="Vercel" href="https://vercel.com/?utm_source=codeedit&utm_campaign=oss" target="_blank"><img src="https://user-images.githubusercontent.com/806104/162766170-60f3b95a-ca30-4015-a3e3-a605df78b98a.png" width="128"></a>
 <a title="MacStadium" href="https://macstadium.com" target="_blank"><img src="https://user-images.githubusercontent.com/806104/162766594-eff7f985-31a9-48c5-9e58-139794fefa10.png" width="128"></a>
@@ -226,7 +230,7 @@ Support CodeEdit's development by [becoming a sponsor](https://github.com/sponso
 
 ## Backers
 
-Support CodeEdit's development by [becoming a backer](https://github.com/sponsors/CodeEditApp).
+Support b-code's development by [becoming a backer](https://github.com/sponsors/CodeEditApp).
 
 <a title="dannydorazio" href="https://github.com/dannydorazio" target="_blank"><img src="https://avatars.githubusercontent.com/u/21158275?v=4" width="64"></a>
 <a title="omrd" href="https://github.com/omrd" target="_blank"><img src="https://avatars.githubusercontent.com/u/34616424?v=4" width="64"></a>

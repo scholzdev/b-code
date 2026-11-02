@@ -4,7 +4,7 @@ on:
   workflow_call:
 jobs:
   test:
-    name: Testing CodeEdit
+    name: Testing BCode
     runs-on: [self-hosted, macOS]
     steps:
       - name: Checkout repository

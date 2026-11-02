@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "2610"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B658FB2B27DA9E0F00EA4DBD"
+               BuildableName = "BCode.app"
+               BlueprintName = "BCode"
+               ReferencedContainer = "container:BCode.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:BCodeTestPlan.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B658FB3C27DA9E1000EA4DBD"
+               BuildableName = "BCodeTests.xctest"
+               BlueprintName = "BCodeTests"
+               ReferencedContainer = "container:BCode.xcodeproj">
+            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "BCodeUIUnitTests">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testBranchPickerDark()">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testBranchPickerLight()">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testEffectViewDark()">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testEffectViewLight()">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testFontPickerViewDark()">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testFontPickerViewLight()">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testHelpButtonDark()">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testHelpButtonLight()">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testSegmentedControlDark()">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testSegmentedControlLight()">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testSegmentedControlProminentDark()">
+               </Test>
+               <Test
+                  Identifier = "BCodeUIUnitTests/testSegmentedControlProminentLight()">
+               </Test>
+               <Test
+                  Identifier = "WelcomeModuleUnitTests">
+               </Test>
+               <Test
+                  Identifier = "WelcomeModuleUnitTests/testRecentJSFileDarkSnapshot()">
+               </Test>
+               <Test
+                  Identifier = "WelcomeModuleUnitTests/testRecentJSFileLightSnapshot()">
+               </Test>
+               <Test
+                  Identifier = "WelcomeModuleUnitTests/testRecentProjectItemDarkSnapshot()">
+               </Test>
+               <Test
+                  Identifier = "WelcomeModuleUnitTests/testRecentProjectItemLightSnapshot()">
+               </Test>
+               <Test
+                  Identifier = "WelcomeModuleUnitTests/testWelcomeActionViewDarkSnapshot()">
+               </Test>
+               <Test
+                  Identifier = "WelcomeModuleUnitTests/testWelcomeActionViewLightSnapshot()">
+               </Test>
+            </SkippedTests>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B658FB4627DA9E1000EA4DBD"
+               BuildableName = "BCodeUITests.xctest"
+               BlueprintName = "BCodeUITests"
+               ReferencedContainer = "container:BCode.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B658FB2B27DA9E0F00EA4DBD"
+            BuildableName = "BCode.app"
+            BlueprintName = "BCode"
+            ReferencedContainer = "container:BCode.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B658FB2B27DA9E0F00EA4DBD"
+            BuildableName = "BCode.app"
+            BlueprintName = "BCode"
+            ReferencedContainer = "container:BCode.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

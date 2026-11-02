@@ -1,4 +1,4 @@
-# ``CodeEdit/ThemeSettingsView``
+# ``BCode/ThemeSettingsView``
 
 ## Topics
 

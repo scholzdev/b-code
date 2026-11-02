@@ -1,4 +1,4 @@
-# ``CodeEdit/SourceControlSettingsView``
+# ``BCode/SourceControlSettingsView``
 
 ## Topics
 
