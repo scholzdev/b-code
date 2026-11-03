@@ -42,7 +42,7 @@ final class ProjectNavigatorUITests: XCTestCase {
         let rowCount = navigator.descendants(matching: .outlineRow).count
 
         // Open a folder
-        let bCodeFolderRow = Query.Navigator.getProjectNavigatorRow(fileTitle: "b-code", index: 1, navigator)
+        let bCodeFolderRow = Query.Navigator.getProjectNavigatorRow(fileTitle: "BCode", index: 1, navigator)
         XCTAssertTrue(bCodeFolderRow.exists)
         XCTAssertTrue(
             Query.Navigator.rowContainsDisclosureIndicator(bCodeFolderRow),
