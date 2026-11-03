@@ -24,7 +24,7 @@ final class BuildConfigurationTests: XCTestCase {
 
     func testCodableRoundTrip() throws {
         let data = try JSONEncoder().encode([BuildConfiguration.release, .debug])
-        XCTAssertEqual(String(decoding: data, as: UTF8.self), "[\"Release\",\"Debug\"]")
+        XCTAssertEqual(String(bytes: data, encoding: .utf8), "[\"Release\",\"Debug\"]")
         XCTAssertEqual(try JSONDecoder().decode([BuildConfiguration].self, from: data), [.release, .debug])
     }
 }
