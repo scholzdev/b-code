@@ -16,7 +16,13 @@ identifier_name:
 # paths to ignore during linting.
 excluded:
   - BCodeModules/.build # Where Swift Package Manager checks out dependency sources
-  - Packages/*/.build # Build output of the local packages (generated test entry points etc.)
+  # Build output of the local packages (generated test entry points etc.). The Xcode plug-in lints the whole
+  # project directory, so these must be excluded explicitly.
+  - Packages/BHumanKit/.build
+  - Packages/BCSymbols/.build
+  - Packages/AboutWindow/.build
+  - Packages/WelcomeWindow/.build
+  - "Packages/*/.build/**"
   - DerivedData
 
 opt_in_rules:
