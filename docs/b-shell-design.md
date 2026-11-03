@@ -1,11 +1,11 @@
 # b-shell / Deploy: findings and design
 
-Status of this document: written against `scholzdev/b-code` at `fa2aebd` (CodeEdit snapshot) and the B-Human
+Status of this document: written against `scholzdev/b-code` at `fa2aebd` (the pre-rename CodeEdit snapshot; the paths below were updated to the renamed `BCode/` layout on `main`) and the B-Human
 Code Release tag `coderelease2026` (`2e3374b`, 2026-10-10). File and line references are to those revisions.
 Nothing in this document has been run on a Mac: the environment it was written in is Linux without a Swift
-toolchain, so every statement about runtime behavior of CodeEdit is read from source, not observed.
+toolchain, so every statement about runtime behavior of b-code is read from source, not observed.
 
-This PR changes **no CodeEdit file**. It adds `Packages/BHumanKit` (Foundation-only models and services) and this
+This PR changes **no app source file**. It adds `Packages/BHumanKit` (Foundation-only models and services) and this
 document. All hooks below are proposals.
 
 ## 1. What the B-Human Code Release contains (and where it differs from the brief)
@@ -90,39 +90,39 @@ file formats and command-line contracts. The one embedded fragment, the remote s
 team's use of the Deploy Dialog's behavior counts as use of "parts of this code release" for competition rules
 is a question for the team, not something this document settles.
 
-## 2. Where things live in CodeEdit
+## 2. Where things live in b-code
 
-All paths relative to the repository root (`CodeEdit/…` is the app target).
+All paths relative to the repository root (`BCode/…` is the app target).
 
 | Concern | Location | Notes |
 | --- | --- | --- |
-| Window, owns the toolbar and split view | `CodeEdit/Features/Documents/Controllers/CodeEditWindowController.swift` | `init` at ~L40–77 calls `setupSplitView` (L91), `setupToolbar()` (L76), `registerCommands()`. `navigatorSidebarViewModel` (L31). |
-| Toolbar construction | `…/Controllers/CodeEditWindowController+Toolbar.swift` | AppKit `NSToolbar`. `setupToolbar` L13; default items L31–74; allowed items L76–100; `itemForItemIdentifier` switch L120–198. Two layouts: macOS 26 (`.taskSidebarItem` group of stop+start, L178–194) and older (`.stopTaskSidebarItem` / `.startTaskSidebarItem`, L200–226). |
-| Toolbar identifiers | `…/Controllers/CodeEditWindowControllerExtensions.swift` L115–125 | `extension NSToolbarItem.Identifier`. |
-| Start / Stop buttons | `CodeEdit/Features/Tasks/ToolbarItems/StartTaskToolbarItem.swift` (macOS 26, `startTask()` L33–43), `…/Tasks/Views/StartTaskToolbarButton.swift` (older) | `startTask` calls `taskManager.executeActiveTask()`, opens the utility area and selects `.debugConsole`. |
-| **Run action** | `CodeEdit/Features/Tasks/TaskManager.swift` | `executeActiveTask()` L63, `runTask(task:)` L70, `terminateActiveTask()` L90, `selectedTask` L34. `@MainActor`. |
-| Run menu / ⌘R / ⌘. | `CodeEdit/Features/WindowCommands/TasksCommands.swift` | `CommandMenu("Tasks")`; "Run \"<task>\"" with `⌘R`. Registered in `CodeEditCommands.swift` L18–22. |
-| What a "task" is | `CodeEdit/Features/CEWorkspaceSettings/Models/CETask.swift`, `…/Tasks/Models/CEActiveTask.swift` (`run` L47) | `CETask`: `name, target, workingDirectory, command, environmentVariables`; `fullCommand` = `cd <dir> && <command>`. Executed through a shell in a terminal-backed view; output, status notification and Stop come for free. |
-| Per-workspace objects | `CodeEdit/Features/Documents/WorkspaceDocument/WorkspaceDocument.swift` | Properties L37–45 (`utilityAreaModel`, `sourceControlManager`, `taskManager`, `workspaceSettingsManager`); created in `initWorkspaceState` (~L131–170; `TaskManager` at ~L160–167); released at ~L194–199. |
+| Window, owns the toolbar and split view | `BCode/Features/Documents/Controllers/BCodeWindowController.swift` | `init` at ~L40–77 calls `setupSplitView` (L91), `setupToolbar()` (L76), `registerCommands()`. `navigatorSidebarViewModel` (L31). |
+| Toolbar construction | `…/Controllers/BCodeWindowController+Toolbar.swift` | AppKit `NSToolbar`. `setupToolbar` L13; default items L31–74; allowed items L76–100; `itemForItemIdentifier` switch L120–198. Two layouts: macOS 26 (`.taskSidebarItem` group of stop+start, L178–194) and older, now dead code at the macOS 27 floor (`.stopTaskSidebarItem` / `.startTaskSidebarItem`, L200–226). |
+| Toolbar identifiers | `…/Controllers/BCodeWindowControllerExtensions.swift` L115–125 | `extension NSToolbarItem.Identifier`. |
+| Start / Stop buttons | `BCode/Features/Tasks/ToolbarItems/StartTaskToolbarItem.swift` (macOS 26, `startTask()` L33–43), `…/Tasks/Views/StartTaskToolbarButton.swift` (older) | `startTask` calls `taskManager.executeActiveTask()`, opens the utility area and selects `.debugConsole`. |
+| **Run action** | `BCode/Features/Tasks/TaskManager.swift` | `executeActiveTask()` L63, `runTask(task:)` L70, `terminateActiveTask()` L90, `selectedTask` L34. `@MainActor`. |
+| Run menu / ⌘R / ⌘. | `BCode/Features/WindowCommands/TasksCommands.swift` | `CommandMenu("Tasks")`; "Run \"<task>\"" with `⌘R`. Registered in `BCodeCommands.swift` L18–22. |
+| What a "task" is | `BCode/Features/CEWorkspaceSettings/Models/CETask.swift`, `…/Tasks/Models/CEActiveTask.swift` (`run` L47) | `CETask`: `name, target, workingDirectory, command, environmentVariables`; `fullCommand` = `cd <dir> && <command>`. Executed through a shell in a terminal-backed view; output, status notification and Stop come for free. |
+| Per-workspace objects | `BCode/Features/Documents/WorkspaceDocument/WorkspaceDocument.swift` | Properties L37–45 (`utilityAreaModel`, `sourceControlManager`, `taskManager`, `workspaceSettingsManager`); created in `initWorkspaceState` (~L131–170; `TaskManager` at ~L160–167); released at ~L194–199. |
 | Persistent per-workspace UI state | `…/WorkspaceDocument/WorkspaceStateKey.swift` | `enum WorkspaceStateKey: String`; used via `addToWorkspaceState(key:value:)`. |
-| **Sheets** | `CodeEdit/WorkspaceSheets.swift` | A view that is `EmptyView()` carrying `.sheet`/`.alert` modifiers bound to `SourceControlManager` `@Published` flags (`pushSheetIsPresented`, … in `SourceControlManager.swift` L47–73). Mounted at `CodeEdit/WorkspaceView.swift` L122: `.background(WorkspaceSheets().environmentObject(sourceControlManager))`. Triggers: e.g. `SourceControlCommands.swift` L28. |
-| **Navigator tabs** | `CodeEdit/Features/NavigatorArea/Models/NavigatorTab.swift` | `enum NavigatorTab` (L12): `project`, `sourceControl`, `search`, `uiExtension`. Exhaustive `switch`es in `systemImage` (L18), `title` (L38), `body` (L51), `bottomView(workspace:)` (L64–79); `id` (L31) falls back to `title`. |
-| Tab registration | `CodeEdit/Features/NavigatorArea/Views/NavigatorAreaView.swift` L22–33 | `viewModel.tabItems = [.project, .sourceControl, .search] + extensions…`. |
-| Tab selection / shortcuts | `…/NavigatorArea/ViewModels/NavigatorAreaViewModel.swift`, `…/WindowCommands/ViewCommands.swift` L157–171 | `selectedTab`, `tabItems`, `setNavigatorTab(tab:)`. The "Navigators" menu gives `⌘1`…`⌘9` to the first nine `tabItems`, so a new tab gets its shortcut automatically. Programmatic selection example: `CodeEditWindowController.swift` L147–159 (`openSearchNavigator`). |
+| **Sheets** | `BCode/WorkspaceSheets.swift` | A view that is `EmptyView()` carrying `.sheet`/`.alert` modifiers bound to `SourceControlManager` `@Published` flags (`pushSheetIsPresented`, … in `SourceControlManager.swift` L47–73). Mounted at `BCode/WorkspaceView.swift` L122: `.background(WorkspaceSheets().environmentObject(sourceControlManager))`. Triggers: e.g. `SourceControlCommands.swift` L28. |
+| **Navigator tabs** | `BCode/Features/NavigatorArea/Models/NavigatorTab.swift` | `enum NavigatorTab` (L12): `project`, `sourceControl`, `search`, `uiExtension`. Exhaustive `switch`es in `systemImage` (L18), `title` (L38), `body` (L51), `bottomView(workspace:)` (L64–79); `id` (L31) falls back to `title`. |
+| Tab registration | `BCode/Features/NavigatorArea/Views/NavigatorAreaView.swift` L22–33 | `viewModel.tabItems = [.project, .sourceControl, .search] + extensions…`. |
+| Tab selection / shortcuts | `…/NavigatorArea/ViewModels/NavigatorAreaViewModel.swift`, `…/WindowCommands/ViewCommands.swift` L157–171 | `selectedTab`, `tabItems`, `setNavigatorTab(tab:)`. The "Navigators" menu gives `⌘1`…`⌘9` to the first nine `tabItems`, so a new tab gets its shortcut automatically. Programmatic selection example: `BCodeWindowController.swift` L147–159 (`openSearchNavigator`). |
 | Navigator view needing a manager | `…/SourceControlNavigator/Views/SourceControlNavigatorView.swift` L11–20 | Reads `workspace.sourceControlManager` from `@EnvironmentObject workspace` and re-injects it with `.environmentObject(...)`. This is the pattern to copy. |
 | Bottom bar of a navigator | `NavigatorTab.bottomView(workspace:)` | e.g. `SourceControlNavigatorToolbarBottom`. |
-| Utility area (console panel) | `CodeEdit/Features/UtilityArea/Models/UtilityAreaTab.swift` | `terminal`, `debugConsole`, `output`. |
-| Command palette | `…/Controllers/CodeEditWindowControllerExtensions.swift` L13+ (`registerCommands`) | `CommandManager.shared.addCommand(name:title:id:command:)`. |
-| Entitlements | `CodeEdit/CodeEdit.entitlements`; `CodeEdit.xcodeproj/project.pbxproj` (`ENABLE_APP_SANDBOX = YES`, among others at L1151/L1424/L1468; `CODE_SIGN_ENTITLEMENTS` L1142/L1415) | See §4.1. |
+| Utility area (console panel) | `BCode/Features/UtilityArea/Models/UtilityAreaTab.swift` | `terminal`, `debugConsole`, `output`. |
+| Command palette | `…/Controllers/BCodeWindowControllerExtensions.swift` L13+ (`registerCommands`) | `CommandManager.shared.addCommand(name:title:id:command:)`. |
+| Entitlements | `BCode/BCode.entitlements`; `BCode.xcodeproj/project.pbxproj` (`ENABLE_APP_SANDBOX = YES`, among others at L1151/L1424/L1468; `CODE_SIGN_ENTITLEMENTS` L1142/L1415) | See §4.1. |
 
 ## 3. Proposed hook points
 
 ### 3.1 Principles
 
-1. All new code lives under `CodeEdit/Features/BShell/` plus the `BHumanKit` package. Core files only receive
+1. All new code lives under `BCode/Features/BShell/` plus the `BHumanKit` package. Core files only receive
    one- to five-line hooks, each prefixed with `// b-code hook:` so they are greppable and easy to carry across
    upstream merges.
-2. Follow the pattern CodeEdit already uses for source control: a per-workspace `ObservableObject` manager
+2. Follow the pattern the app already uses for source control: a per-workspace `ObservableObject` manager
    created in `WorkspaceDocument`, `@Published` presentation flags, sheets in a dedicated host view.
 3. The b-shell UI only appears for workspaces that look like a B-Human checkout
    (`Make/Common/deploy` and `Config/teams.cfg` exist), so ordinary projects are unaffected.
@@ -131,7 +131,7 @@ All paths relative to the repository root (`CodeEdit/…` is the app target).
 
 ### 3.2 The state holder: `BShellManager`
 
-New file `CodeEdit/Features/BShell/BShellManager.swift`, `@MainActor final class BShellManager: ObservableObject`:
+New file `BCode/Features/BShell/BShellManager.swift`, `@MainActor final class BShellManager: ObservableObject`:
 
 - inputs: `repositoryRoot: URL`, `any RobotStatusProviding`, `DeployService`
 - published: `teams: [Team]`, `robots: [Robot]` (roles applied for `selectedTeam`), `statuses: [String: RobotStatus]`,
@@ -152,13 +152,13 @@ block (~L167), and `bShellManager = nil` in the cleanup list (~L199).
 | Trigger | Hook |
 | --- | --- |
 | Toolbar button | H2: add `static let deployItem` to the identifier extension (`…WindowControllerExtensions.swift` L115–125); add `.deployItem` to the default list (after the task items, L36–44) and the allowed list (L76–100) in `…+Toolbar.swift`; add a `case .deployItem:` in the `itemForItemIdentifier` switch (L125–197) returning an `NSToolbarItem` with an SF Symbol and `action` → `toggle`. On macOS 26 it can be a third `subitem` of `.taskSidebarItem` (L192). The item should only be inserted when `workspace.bShellManager != nil`. |
-| Menu | H3: new `CodeEdit/Features/WindowCommands/BShellCommands.swift` (copy of the `TasksCommands` structure: `@UpdatingWindowController`, "Deploy…" with e.g. `⇧⌘D`; check the shortcut for collisions) and one line `BShellCommands()` in `CodeEditCommands.swift` next to `TasksCommands()` (L21). |
+| Menu | H3: new `BCode/Features/WindowCommands/BShellCommands.swift` (copy of the `TasksCommands` structure: `@UpdatingWindowController`, "Deploy…" with e.g. `⇧⌘D`; check the shortcut for collisions) and one line `BShellCommands()` in `BCodeCommands.swift` next to `TasksCommands()` (L21). |
 | Command palette | H4: one `CommandManager.shared.addCommand(...)` in `registerCommands()` (`…WindowControllerExtensions.swift` L13+). |
 
 **Host.** Do not edit `WorkspaceSheets` (it takes only `SourceControlManager`). Add a sibling:
 
 ```swift
-// CodeEdit/Features/BShell/BShellSheets.swift
+// BCode/Features/BShell/BShellSheets.swift
 struct BShellSheets: View {
     @EnvironmentObject private var workspace: WorkspaceDocument   // already in the environment
     var body: some View {
@@ -211,23 +211,21 @@ Log, Download Calibration, Start/Restart, Stop, Shutdown (they call `Make/Common
 | --- | --- | --- | --- |
 | H1 | `WorkspaceDocument.swift` | ~6 lines | create / release `BShellManager` |
 | H2 | `…WindowControllerExtensions.swift`, `…+Toolbar.swift` | ~15 lines | Deploy toolbar item |
-| H3 | `CodeEditCommands.swift` (+ new `BShellCommands.swift`) | 1 line | menu |
+| H3 | `BCodeCommands.swift` (+ new `BShellCommands.swift`) | 1 line | menu |
 | H4 | `…WindowControllerExtensions.swift` | ~6 lines | command palette |
 | H5 | `WorkspaceView.swift` | 1 line | sheet host |
 | H6 | `NavigatorTab.swift` | ~12 lines | new tab |
 | H7 | `NavigatorAreaView.swift` | 1–2 lines | register tab |
 | H8 | `WorkspaceStateKey.swift` | 1–2 lines | persistence key |
-| H9 | `CodeEdit.xcodeproj` | Xcode-generated | local package `Packages/BHumanKit` and new files in the target |
+| H9 | `BCode.xcodeproj` | Xcode-generated | local package `Packages/BHumanKit` and new files in the target |
 
-H9: the project only has *remote* package references today (`XCRemoteSwiftPackageReference`, e.g. CodeEditSymbols,
-Sparkle). Adding the local package must be done in Xcode (*File ▸ Add Package Dependencies ▸ Add Local…*); I did not
-hand-edit `project.pbxproj`. New app files must be added to the CodeEdit target in the same session.
+H9: the project already references one local package (`Packages/BCSymbols`, an `XCLocalSwiftPackageReference` added by script and not yet opened in Xcode) next to the remote ones (e.g. Sparkle). Add `Packages/BHumanKit` the same way (*File ▸ Add Package Dependencies ▸ Add Local…*) and let Xcode write the entry. New app files must be added to the BCode target in the same session.
 
 ## 4. Risks and open questions
 
 ### 4.1 App Sandbox (most important)
 
-`CodeEdit/CodeEdit.entitlements` enables `com.apple.security.app-sandbox` with only user-selected-files
+`BCode/BCode.entitlements` enables `com.apple.security.app-sandbox` with only user-selected-files
 (read/write), app-scoped bookmarks and `network.client`; the build settings carry `ENABLE_APP_SANDBOX = YES`. This
 was introduced by upstream commit `78c3be9` ("Fix/deprecations memory leak entitlements (#2147)").
 
@@ -247,7 +245,7 @@ or add targeted temporary-exception entitlements, or move process execution into
   `xcodebuild`; compiling needs the toolchain the Code Release's own docs ask for. Not checked here.
 - **Concurrency.** `TaskManager` is `@MainActor`; `BShellManager` should be too. `BHumanKit` types are `Sendable`
   value types and the protocols are `Sendable`, so they can cross to a background polling task.
-- **Two toolbar code paths** (macOS 26 vs earlier) must both get the Deploy item (H2).
+- **Toolbar code paths.** The deployment target is macOS 27, so only the macOS 26+ layout (`.taskSidebarItem`) is reachable; the pre-26 layout is dead code and needs no Deploy item (H2).
 - **Polling cost.** Each cycle is two pings plus one SSH round-trip per reachable robot; SSH key handling is whatever
   `Make/Common/robotSSH`/`setupSSH` do (`Install/Keys`). Keep polling tied to the tab being visible.
 
@@ -262,7 +260,7 @@ or add targeted temporary-exception entitlements, or move process execution into
 
 ## 6. `BHumanKit` status
 
-Location: `Packages/BHumanKit` (Swift tools 5.9, macOS 14+, Foundation only, XCTest).
+Location: `Packages/BHumanKit` (Swift tools 5.9, macOS 27+, Foundation only, XCTest).
 
 | Area | Types | Tests |
 | --- | --- | --- |
@@ -279,7 +277,7 @@ syntax mistakes only. Expect some compile errors on the first real build, most l
 generic/closure-heavy spots (`FakeCommandRunner` trailing closures, `any RobotStatusProviding` existential).
 
 Not implemented on purpose: a real `Process`-based `CommandRunner`, writing `teams.cfg`, parsing `deploy`'s
-`[<ip>]` output per robot, log download, any UI, any CodeEdit change.
+`[<ip>]` output per robot, log download, any UI, any b-code change.
 
 To verify on a Mac or Linux box with Swift 5.9+:
 

@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "BHumanKit",
     platforms: [
-        .macOS(.v14)
+        .macOS("27.0")
     ],
     products: [
         .library(name: "BHumanKit", targets: ["BHumanKit"])
