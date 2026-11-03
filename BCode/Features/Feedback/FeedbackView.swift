@@ -201,7 +201,6 @@ struct FeedbackView: View {
                 TextEditor(text: $feedbackModel.whatHappenedDescription)
                            .frame(minHeight: 60, alignment: .leading)
                            .border(Color(NSColor.separatorColor))
-                // swiftlint:disable:next line_length
                 Text("Example: The autocomplete window flickered on screen and b-code crashed. See attached crashlog.")
                     .font(.system(size: 10))
                     .foregroundColor(.secondary)
