@@ -49,6 +49,10 @@ struct TaskNotificationView: View {
             }
         }
         .animation(.easeInOut, value: notification)
+        .onAppear {
+            // The toolbar only shows this view while there are notifications, so pick up the current one.
+            notification = taskNotificationHandler.notifications.first
+        }
         .onChange(of: taskNotificationHandler.notifications) { _, newValue in
             withAnimation {
                 notification = newValue.first

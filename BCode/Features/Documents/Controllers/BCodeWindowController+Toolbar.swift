@@ -17,7 +17,6 @@ extension BCodeWindowController {
         self.window?.titleVisibility = toolbarCollapsed ? .visible : .hidden
         if #available(macOS 26, *) {
             self.window?.toolbarStyle = .automatic
-            toolbar.centeredItemIdentifiers = [.activityViewer, .notificationItem]
             toolbar.displayMode = .iconOnly
             self.window?.titlebarAppearsTransparent = true
         } else {
@@ -50,25 +49,25 @@ extension BCodeWindowController {
         ]
 
         if #available(macOS 26, *) {
+            // Like Xcode: the activity area sits on the right, next to the inspector, not centered.
             items += [
-                .activityViewer,
-                .space,
                 .notificationItem,
+                .activityViewer,
+                .itemListTrackingSeparator,
+                .flexibleSpace,
+                .toggleLastSidebarItem
             ]
         } else {
             items += [
                 .activityViewer,
                 .notificationItem,
                 .flexibleSpace,
+                .flexibleSpace,
+                .itemListTrackingSeparator,
+                .flexibleSpace,
+                .toggleLastSidebarItem
             ]
         }
-
-        items += [
-            .flexibleSpace,
-            .itemListTrackingSeparator,
-            .flexibleSpace,
-            .toggleLastSidebarItem
-        ]
 
         return items
     }
@@ -165,7 +164,8 @@ extension BCodeWindowController {
             let toolbarItem = NSToolbarItem(itemIdentifier: .branchPicker)
             let view = NSHostingView(
                 rootView: ToolbarBranchPicker(
-                    workspaceFileManager: workspace?.workspaceFileManager
+                    workspaceFileManager: workspace?.workspaceFileManager,
+                    taskNotificationHandler: workspace?.taskNotificationHandler
                 )
             )
             toolbarItem.view = view
@@ -189,7 +189,8 @@ extension BCodeWindowController {
             group.isBordered = true
             group.controlRepresentation = .expanded
             group.selectionMode = .momentary
-            group.subitems = [stop, start]
+            // Like Xcode: run first, then stop.
+            group.subitems = [start, stop]
 
             return group
         default:
@@ -237,28 +238,17 @@ extension BCodeWindowController {
         let toolbarItem = NSToolbarItem(itemIdentifier: NSToolbarItem.Identifier.activityViewer)
         toolbarItem.visibilityPriority = .user
         guard let workspaceSettingsManager = workspace?.workspaceSettingsManager,
-              let taskNotificationHandler = workspace?.taskNotificationHandler,
               let taskManager = workspace?.taskManager
         else { return nil }
 
+        // No width constraints: the item is as wide as "scheme › destination", like Xcode's compact capsule.
         let view = NSHostingView(
             rootView: ActivityViewer(
                 workspaceFileManager: workspace?.workspaceFileManager,
                 workspaceSettingsManager: workspaceSettingsManager,
-                taskNotificationHandler: taskNotificationHandler,
                 taskManager: taskManager
             )
         )
-
-        let weakWidth = view.widthAnchor.constraint(equalToConstant: 650)
-        weakWidth.priority = .defaultLow
-        let strongWidth = view.widthAnchor.constraint(greaterThanOrEqualToConstant: 200)
-        strongWidth.priority = .defaultHigh
-
-        NSLayoutConstraint.activate([
-            weakWidth,
-            strongWidth
-        ])
 
         toolbarItem.view = view
         return toolbarItem
