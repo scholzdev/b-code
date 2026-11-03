@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CodeEditKit
+import BCKit
 
 struct ExtensionCommands: Commands {
     @FocusedObject var manager: ExtensionManager?
