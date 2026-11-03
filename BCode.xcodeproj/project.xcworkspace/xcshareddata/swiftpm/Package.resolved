@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "aboutwindow",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CodeEditApp/AboutWindow",
-      "state" : {
-        "revision" : "bdec18efb0dbee79613e7efa446ed3cc8e834842",
-        "version" : "1.0.1"
-      }
-    },
-    {
       "identity" : "anycodable",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Flight-School/AnyCodable",
@@ -273,15 +264,6 @@
       "state" : {
         "revision" : "f2f197b6b27ce75c280c20f131d4f71e906b86f7",
         "version" : "0.25.8"
-      }
-    },
-    {
-      "identity" : "welcomewindow",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CodeEditApp/WelcomeWindow",
-      "state" : {
-        "revision" : "cbd5c0d6f432449e2a8618e2b24e4691acbfcc98",
-        "version" : "1.1.0"
       }
     },
     {

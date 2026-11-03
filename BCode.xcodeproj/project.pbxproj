@@ -439,8 +439,8 @@
 				303E88462C276FD600EEA8D9 /* XCRemoteSwiftPackageReference "LanguageServerProtocol" */,
 				6CB94D012CA1205100E8651C /* XCRemoteSwiftPackageReference "swift-async-algorithms" */,
 				30ED7B722DD299E600ACC922 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
-				5EACE6202DF4BF08005E08B8 /* XCRemoteSwiftPackageReference "WelcomeWindow" */,
-				5E44855F2DF600D9008BBE69 /* XCRemoteSwiftPackageReference "AboutWindow" */,
+				5EACE6202DF4BF08005E08B8 /* XCLocalSwiftPackageReference "Packages/WelcomeWindow" */,
+				5E44855F2DF600D9008BBE69 /* XCLocalSwiftPackageReference "Packages/AboutWindow" */,
 				6C76D6D22E15B91E00EF52C3 /* XCRemoteSwiftPackageReference "BCSourceEditor" */,
 				6CCF73CE2E26DE3200B94F75 /* XCRemoteSwiftPackageReference "SwiftTerm" */,
 			);
@@ -1674,6 +1674,14 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/BCSymbols;
 		};
+		5E44855F2DF600D9008BBE69 /* XCLocalSwiftPackageReference "Packages/AboutWindow" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/AboutWindow;
+		};
+		5EACE6202DF4BF08005E08B8 /* XCLocalSwiftPackageReference "Packages/WelcomeWindow" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/WelcomeWindow;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1747,22 +1755,6 @@
 			requirement = {
 				kind = exactVersion;
 				version = 2.3.0;
-			};
-		};
-		5E44855F2DF600D9008BBE69 /* XCRemoteSwiftPackageReference "AboutWindow" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CodeEditApp/AboutWindow";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		5EACE6202DF4BF08005E08B8 /* XCRemoteSwiftPackageReference "WelcomeWindow" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CodeEditApp/WelcomeWindow";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
 			};
 		};
 		6C0617D42BDB4432008C9C42 /* XCRemoteSwiftPackageReference "LogStream" */ = {
@@ -1880,12 +1872,12 @@
 		};
 		5E4485602DF600D9008BBE69 /* AboutWindow */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5E44855F2DF600D9008BBE69 /* XCRemoteSwiftPackageReference "AboutWindow" */;
+			package = 5E44855F2DF600D9008BBE69 /* XCLocalSwiftPackageReference "Packages/AboutWindow" */;
 			productName = AboutWindow;
 		};
 		5EACE6212DF4BF08005E08B8 /* WelcomeWindow */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5EACE6202DF4BF08005E08B8 /* XCRemoteSwiftPackageReference "WelcomeWindow" */;
+			package = 5EACE6202DF4BF08005E08B8 /* XCLocalSwiftPackageReference "Packages/WelcomeWindow" */;
 			productName = WelcomeWindow;
 		};
 		6C0617D52BDB4432008C9C42 /* LogStream */ = {
