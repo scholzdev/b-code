@@ -182,6 +182,7 @@ button. "Deploy" builds a `DeployRequest` from the selected `Team` and the robot
 
 - *Option 0, no code:* a `CETask` named "Deploy" whose command is `Make/Common/deploy Develop <ip> -p 1`. Works
   today with the existing Run button; useful as a smoke test of §4.1.
+  **Implemented:** `BHumanTasks` (`BCode/Features/BShell/BHumanTasks.swift`) offers the six Xcode schemes B-Human generates (`Booster - Debug|Develop|Release`, `SimRobot - Debug|Develop|Release`) as built-in tasks whenever the workspace looks like a Code Release checkout. `TaskManager` merges them with the user's own tasks (hook marked `b-code hook:`), so they appear in the toolbar's task menu with ▶/■ like schemes in Xcode. `Booster - …` builds `Booster` and the Deploy Dialog and opens the dialog.
 - *Option A (recommended for v1):* `BShellManager` turns `DeployService.compileInvocation` /
   `deployInvocation` into `CETask`s using `CommandInvocation.shellCommandLine` and `workingDirectory`, runs them
   with `taskManager.runTask(task:)` (L70) one after the other, and reads the result from
