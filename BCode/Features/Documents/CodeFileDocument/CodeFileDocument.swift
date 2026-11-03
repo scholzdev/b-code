@@ -9,9 +9,9 @@ import AppKit
 import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
-import CodeEditSourceEditor
-import CodeEditTextView
-import CodeEditLanguages
+import BCSourceEditor
+import BCTextView
+import BCLanguages
 import Combine
 import OSLog
 import TextStory
@@ -48,7 +48,7 @@ final class CodeFileDocument: NSDocument, ObservableObject {
     var sourceEncoding: FileEncoding?
 
     /// The coordinator to use to subscribe to edit events and cursor location events.
-    /// See ``CodeEditSourceEditor/CombineCoordinator``.
+    /// See ``BCSourceEditor/CombineCoordinator``.
     @Published var contentCoordinator: CombineCoordinator = CombineCoordinator()
 
     /// Used to override detected languages.

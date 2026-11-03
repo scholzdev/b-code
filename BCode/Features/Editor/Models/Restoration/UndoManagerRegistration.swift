@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CodeEditTextView
+import BCTextView
 
 /// Very simple class for registering undo manager for files for a project session. This does not do any saving, it
 /// just stores the undo managers in memory and retrieves them as necessary for files.

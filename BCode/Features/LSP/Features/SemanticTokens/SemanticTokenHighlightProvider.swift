@@ -7,9 +7,9 @@
 
 import Foundation
 import LanguageServerProtocol
-import CodeEditSourceEditor
-import CodeEditTextView
-import CodeEditLanguages
+import BCSourceEditor
+import BCTextView
+import BCLanguages
 
 /// Provides semantic token information from a language server for a source editor view.
 ///

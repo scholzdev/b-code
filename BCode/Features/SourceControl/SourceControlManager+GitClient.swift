@@ -100,7 +100,7 @@ extension SourceControlManager {
             do {
                 try await gitClient.discardChanges(for: file)
                 // TODO: Refresh content of active and unmodified document,
-                // requires CodeEditSourceEditor changes
+                // requires BCSourceEditor changes
             } catch {
                 logger.error("Failed to discard changes for file (\(file.lastPathComponent): \(error)")
                 await showAlertForError(title: "Failed to discard changes", error: error)
@@ -114,7 +114,7 @@ extension SourceControlManager {
             do {
                 try await gitClient.discardAllChanges()
                 // TODO: Refresh content of active and unmodified document,
-                // requires CodeEditSourceEditor changes
+                // requires BCSourceEditor changes
             } catch {
                 logger.error("Failed to discard changes: \(error)")
                 await showAlertForError(title: "Failed to discard changes", error: error)

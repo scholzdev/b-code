@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CodeEditSymbols
+import BCSymbols
 
 struct StatusBarBreakpointButton: View {
     @EnvironmentObject private var statusBarViewModel: StatusBarViewModel

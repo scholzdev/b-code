@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CodeEditTextView
+import BCTextView
 import LanguageServerProtocol
 
 extension TextView: SemanticTokenMapRangeProvider {

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-import CodeEditSymbols
+import BCSymbols
 
 struct EditorJumpBarComponent: View {
     private let fileItem: CEWorkspaceFile

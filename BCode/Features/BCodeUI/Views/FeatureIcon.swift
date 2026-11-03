@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CodeEditSymbols
+import BCSymbols
 
 struct FeatureIcon: View {
     private let content: IconContent

@@ -30,7 +30,7 @@ final class NotificationManager: NSObject, ObservableObject {
 
     /// Posts a new notification
     /// - Parameters:
-    ///   - iconSymbol: SF Symbol or CodeEditSymbol name for the notification icon
+    ///   - iconSymbol: SF Symbol or BCSymbols name for the notification icon
     ///   - iconColor: Color for the icon
     ///   - title: Main notification title
     ///   - description: Detailed notification message

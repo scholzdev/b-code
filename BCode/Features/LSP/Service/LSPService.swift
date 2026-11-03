@@ -11,7 +11,7 @@ import SwiftUI
 import Foundation
 import LanguageClient
 import LanguageServerProtocol
-import CodeEditLanguages
+import BCLanguages
 
 /// `LSPService` is a service class responsible for managing the lifecycle and event handling
 /// of Language Server Protocol (LSP) clients within the b-code application. It handles the initialization,

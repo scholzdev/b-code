@@ -7,9 +7,9 @@
 
 import Foundation
 import SwiftUI
-import CodeEditSourceEditor
-import CodeEditTextView
-import CodeEditLanguages
+import BCSourceEditor
+import BCTextView
+import BCLanguages
 import Combine
 
 /// CodeFileView is just a wrapper of the `CodeEditor` dependency

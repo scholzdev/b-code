@@ -6,7 +6,7 @@
 //
 
 import AppKit
-import CodeEditLanguages
+import BCLanguages
 
 /// A set of properties a language server sets when a document is registered.
 struct LanguageServerDocumentObjects<DocumentType: LanguageServerDocument> {

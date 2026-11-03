@@ -7,7 +7,7 @@
 
 import Foundation
 import GRDB
-import CodeEditSourceEditor
+import BCSourceEditor
 import OSLog
 
 /// b-code attempts to store and retrieve editor state for open tabs to restore the user's scroll position and

@@ -1,5 +1,4 @@
 {
-  "originHash" : "01191ca9685501db65981a6fd21ab2d11c32196633d4cb776b5bb25908ed212f",
   "pins" : [
     {
       "identity" : "aboutwindow",
@@ -20,48 +19,36 @@
       }
     },
     {
+      "identity" : "bclanguages",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scholzdev/BCLanguages.git",
+      "state" : {
+        "revision" : "1896740bdd6fde137e084216bd7d6f29c9f6622b"
+      }
+    },
+    {
+      "identity" : "bcsourceeditor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scholzdev/BCSourceEditor.git",
+      "state" : {
+        "revision" : "18d18c62e3afff9e578ebd7790643ed6cdcfdf5d"
+      }
+    },
+    {
+      "identity" : "bctextview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scholzdev/BCTextView.git",
+      "state" : {
+        "revision" : "e104ce792a4ceb0c947faca3775c85d06dee8708"
+      }
+    },
+    {
       "identity" : "codeeditkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/CodeEditApp/CodeEditKit.git",
       "state" : {
         "revision" : "ad28213a968586abb0cb21a8a56a3587227895f1",
         "version" : "0.1.2"
-      }
-    },
-    {
-      "identity" : "codeeditlanguages",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CodeEditApp/CodeEditLanguages.git",
-      "state" : {
-        "revision" : "331d5dbc5fc8513be5848fce8a2a312908f36a11",
-        "version" : "0.1.20"
-      }
-    },
-    {
-      "identity" : "codeeditsourceeditor",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CodeEditApp/CodeEditSourceEditor",
-      "state" : {
-        "revision" : "ee0c00a2343903df9d6ef45ce53228aca8637369",
-        "version" : "0.15.1"
-      }
-    },
-    {
-      "identity" : "codeeditsymbols",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CodeEditApp/CodeEditSymbols",
-      "state" : {
-        "revision" : "ae69712b08571c4469c2ed5cd38ad9f19439793e",
-        "version" : "0.2.3"
-      }
-    },
-    {
-      "identity" : "codeedittextview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CodeEditApp/CodeEditTextView.git",
-      "state" : {
-        "revision" : "d7ac3f11f22ec2e820187acce8f3a3fb7aa8ddec",
-        "version" : "0.12.1"
       }
     },
     {
