@@ -38,7 +38,8 @@ class GitConfigClient {
         }
 
         fullCommand += " \(command)"
-        return try shellClient.run(fullCommand)
+        // b-code: skip what the user's shell startup files print, it would end up in the config values.
+        return try shellClient.runSkippingStartupOutput(fullCommand)
     }
 
     /// Retrieves a Git configuration value.
