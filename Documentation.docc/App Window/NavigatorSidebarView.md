@@ -1,4 +1,4 @@
-# ``CodeEdit/NavigatorSidebarView``
+# ``BCode/NavigatorSidebarView``
 
 ## Topics
 

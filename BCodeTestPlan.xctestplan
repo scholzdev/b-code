@@ -1,0 +1,58 @@
+{
+  "configurations" : [
+    {
+      "id" : "54F3AF04-2CB5-4C73-888F-75ABD9B93999",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:BCode.xcodeproj",
+      "identifier" : "B658FB2B27DA9E0F00EA4DBD",
+      "name" : "BCode"
+    }
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "BCodeUIUnitTests",
+        "BCodeUIUnitTests\/testBranchPickerDark()",
+        "BCodeUIUnitTests\/testBranchPickerLight()",
+        "BCodeUIUnitTests\/testEffectViewDark()",
+        "BCodeUIUnitTests\/testEffectViewLight()",
+        "BCodeUIUnitTests\/testFontPickerViewDark()",
+        "BCodeUIUnitTests\/testFontPickerViewLight()",
+        "BCodeUIUnitTests\/testHelpButtonDark()",
+        "BCodeUIUnitTests\/testHelpButtonLight()",
+        "BCodeUIUnitTests\/testSegmentedControlDark()",
+        "BCodeUIUnitTests\/testSegmentedControlLight()",
+        "BCodeUIUnitTests\/testSegmentedControlProminentDark()",
+        "BCodeUIUnitTests\/testSegmentedControlProminentLight()",
+        "RegistryTests",
+        "WelcomeModuleUnitTests",
+        "WelcomeModuleUnitTests\/testRecentJSFileDarkSnapshot()",
+        "WelcomeModuleUnitTests\/testRecentJSFileLightSnapshot()",
+        "WelcomeModuleUnitTests\/testRecentProjectItemDarkSnapshot()",
+        "WelcomeModuleUnitTests\/testRecentProjectItemLightSnapshot()",
+        "WelcomeModuleUnitTests\/testWelcomeActionViewDarkSnapshot()",
+        "WelcomeModuleUnitTests\/testWelcomeActionViewLightSnapshot()"
+      ],
+      "target" : {
+        "containerPath" : "container:BCode.xcodeproj",
+        "identifier" : "B658FB3C27DA9E1000EA4DBD",
+        "name" : "BCodeTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:BCode.xcodeproj",
+        "identifier" : "B658FB4627DA9E1000EA4DBD",
+        "name" : "BCodeUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -1,4 +1,4 @@
-# ``CodeEdit/UtilityAreaView``
+# ``BCode/UtilityAreaView``
 
 ## Topics
 

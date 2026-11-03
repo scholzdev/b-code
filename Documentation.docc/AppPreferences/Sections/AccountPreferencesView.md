@@ -1,4 +1,4 @@
-# ``CodeEdit/AccountSettingsView``
+# ``BCode/AccountSettingsView``
 
 ## Topics
 

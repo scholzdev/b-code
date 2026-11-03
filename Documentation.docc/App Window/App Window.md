@@ -6,7 +6,7 @@ A collection of all the views that make up the main app window.
 
 ### Window Controller
 
-- ``CodeEditWindowController``
+- ``BCodeWindowController``
 - ``WorkspaceView``
 
 ### Main Content

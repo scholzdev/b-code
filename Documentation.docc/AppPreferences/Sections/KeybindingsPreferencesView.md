@@ -1,4 +1,4 @@
-# ``CodeEdit/KeybindingsSettingsView``
+# ``BCode/KeybindingsSettingsView``
 
 ## Topics
 

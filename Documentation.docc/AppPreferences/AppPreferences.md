@@ -1,4 +1,4 @@
-# ``CodeEdit/Settings``
+# ``BCode/Settings``
 
 ## Topics
 

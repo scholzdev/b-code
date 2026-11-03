@@ -1,4 +1,4 @@
-# ``CodeEdit/GeneralSettingsView``
+# ``BCode/GeneralSettingsView``
 
 ## Topics
 

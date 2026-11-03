@@ -1,8 +1,8 @@
-# ``CodeEdit/Theme``
+# ``BCode/Theme``
 
 ## Overview
 
-A ``Theme`` is stored in a `theme_name.json` file in the `~/Library/Application Support/CodeEdit/themes/` directory. There are a
+A ``Theme`` is stored in a `theme_name.json` file in the `~/Library/Application Support/b-code/themes/` directory. There are a
 couple of bundled themes that will automatically be put there once the app starts.
 
 Once a `JSON` file is loaded, the ``Theme`` gets added to ``ThemeModel/themes``.
@@ -14,13 +14,13 @@ They can either be ``Theme/ThemeType/dark`` or ``Theme/ThemeType/light``.
 ```json
 {
   "author" : "CodeEdit",
-  "name" : "codeedit-xcode-dark",
+  "name" : "bcode-xcode-dark",
   "displayName" : "Xcode Dark",
   "description" : "Xcode dark theme.",
   "version" : "0.0.1",
   "license" : "MIT",
   "type" : "dark",
-  "distributionURL" : "https:\/\/github.com\/CodeEditApp\/CodeEdit",
+  "distributionURL" : "https:\/\/github.com\/BCodeApp\/BCode",
   "editor" : { ... },
   "terminal" : { ... }
 }

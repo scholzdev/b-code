@@ -45,25 +45,25 @@ jobs:
       ############################
       # Build
       ############################
-      - name: Build CodeEdit
+      - name: Build BCode
         env:
           APPLE_TEAM_ID:  ${{ secrets.APPLE_TEAM_ID }}
-        run: xcodebuild -scheme CodeEdit -configuration Pre -derivedDataPath "$RUNNER_TEMP/DerivedData" -archivePath "$RUNNER_TEMP/CodeEdit.xcarchive" -skipPackagePluginValidation DEVELOPMENT_TEAM=$APPLE_TEAM_ID archive | xcpretty
+        run: xcodebuild -scheme BCode -configuration Pre -derivedDataPath "$RUNNER_TEMP/DerivedData" -archivePath "$RUNNER_TEMP/BCode.xcarchive" -skipPackagePluginValidation DEVELOPMENT_TEAM=$APPLE_TEAM_ID archive | xcpretty
       
       ############################
       # Sign
       ############################
-      - name: Sign CodeEdit
+      - name: Sign BCode
         env:
           CODESIGN_SIGN: ${{ secrets.CODESIGN_SIGN }}
         run: |
           REV=$(git rev-parse --short HEAD)
           echo "REV=$REV" >> $GITHUB_ENV
-          codesign --sign "$CODESIGN_SIGN" -vvv --verbose --strict --options=runtime --prefix app.codeedit.CodeEdit. --force --timestamp "$RUNNER_TEMP/CodeEdit.xcarchive/Products/Applications/CodeEdit.app/Contents/Frameworks/CodeEditKit.framework"
-          codesign --sign "$CODESIGN_SIGN" -vvv --verbose --strict --options=runtime --prefix app.codeedit.CodeEdit. --force --timestamp "$RUNNER_TEMP/CodeEdit.xcarchive/Products/Applications/CodeEdit.app/Contents/Frameworks/CodeLanguages_Container.framework"
-          codesign --sign "$CODESIGN_SIGN" -vvv --verbose --strict --options=runtime --prefix app.codeedit.CodeEdit. --force --deep --timestamp "$RUNNER_TEMP/CodeEdit.xcarchive/Products/Applications/CodeEdit.app/Contents/Frameworks/Sparkle.framework"
-          codesign --sign "$CODESIGN_SIGN" -vvv --verbose --strict --options=runtime --prefix app.codeedit.CodeEdit. --force --timestamp --entitlements "$RUNNER_TEMP/../CodeEdit/CodeEdit/OpenWithCodeEdit/OpenWithCodeEdit.entitlements" "$RUNNER_TEMP/CodeEdit.xcarchive/Products/Applications/CodeEdit.app/Contents/PlugIns/OpenWithCodeEdit.appex"
-          codesign --sign "$CODESIGN_SIGN" -vvv --verbose --strict --options=runtime --prefix app.codeedit.CodeEdit. --force --timestamp "$RUNNER_TEMP/CodeEdit.xcarchive/Products/Applications/CodeEdit.app"
+          codesign --sign "$CODESIGN_SIGN" -vvv --verbose --strict --options=runtime --prefix app.codeedit.CodeEdit. --force --timestamp "$RUNNER_TEMP/BCode.xcarchive/Products/Applications/BCode.app/Contents/Frameworks/CodeEditKit.framework"
+          codesign --sign "$CODESIGN_SIGN" -vvv --verbose --strict --options=runtime --prefix app.codeedit.CodeEdit. --force --timestamp "$RUNNER_TEMP/BCode.xcarchive/Products/Applications/BCode.app/Contents/Frameworks/CodeLanguages_Container.framework"
+          codesign --sign "$CODESIGN_SIGN" -vvv --verbose --strict --options=runtime --prefix app.codeedit.CodeEdit. --force --deep --timestamp "$RUNNER_TEMP/BCode.xcarchive/Products/Applications/BCode.app/Contents/Frameworks/Sparkle.framework"
+          codesign --sign "$CODESIGN_SIGN" -vvv --verbose --strict --options=runtime --prefix app.codeedit.CodeEdit. --force --timestamp --entitlements "$RUNNER_TEMP/../BCode/BCode/OpenWithBCode/OpenWithBCode.entitlements" "$RUNNER_TEMP/BCode.xcarchive/Products/Applications/BCode.app/Contents/PlugIns/OpenWithBCode.appex"
+          codesign --sign "$CODESIGN_SIGN" -vvv --verbose --strict --options=runtime --prefix app.codeedit.CodeEdit. --force --timestamp "$RUNNER_TEMP/BCode.xcarchive/Products/Applications/BCode.app"
 
       ############################
       # DMG & Notarize
@@ -79,24 +79,24 @@ jobs:
           REV=$(git rev-parse --short HEAD)
           echo "REV=$REV" >> $GITHUB_ENV
           security unlock-keychain -p "$RUNNER_PW"
-          xcrun notarytool store-credentials CodeEdit --apple-id "$APPLE_ID" --team-id "$APPLE_TEAM_ID" --password "$APPLE_ID_PWD"
-          cp "$RUNNER_TEMP/../CodeEdit/CodeEdit/Resources/dmgBackground.png" "$RUNNER_TEMP/.background.png"
+          xcrun notarytool store-credentials BCode --apple-id "$APPLE_ID" --team-id "$APPLE_TEAM_ID" --password "$APPLE_ID_PWD"
+          cp "$RUNNER_TEMP/../BCode/BCode/Resources/dmgBackground.png" "$RUNNER_TEMP/.background.png"
           epochdate=$(($(date +'%s * 1000 + %-N / 1000000')))
           tcc_service_appleevents="replace into access (service,client,client_type,auth_value,auth_reason,auth_version,indirect_object_identifier_type,indirect_object_identifier,flags,last_modified) values (\"kTCCServiceAppleEvents\",\"/usr/sbin/sshd\",1,2,4,1,0,\"com.apple.finder\",0,$epochdate);"
           echo $RUNNER_PW | sudo -S sqlite3 "/Users/administrator/Library/Application Support/com.apple.TCC/TCC.db" "$tcc_service_appleevents"
           create-dmg \
-            --volname "CodeEdit" \
+            --volname "BCode" \
             --window-pos 200 120 \
             --window-size 699 518 \
             --background "$RUNNER_TEMP/.background.png" \
             --icon-size 128 \
-            --icon "CodeEdit.app" 170 210 \
-            --hide-extension "CodeEdit.app" \
+            --icon "BCode.app" 170 210 \
+            --hide-extension "BCode.app" \
             --app-drop-link 530 210 \
             --codesign "$CODESIGN_SIGN" \
-            --notarize "CodeEdit" \
-            "$RUNNER_TEMP/CodeEdit.dmg" \
-            "$RUNNER_TEMP/CodeEdit.xcarchive/Products/Applications/"
+            --notarize "BCode" \
+            "$RUNNER_TEMP/BCode.dmg" \
+            "$RUNNER_TEMP/BCode.xcarchive/Products/Applications/"
           echo $RUNNER_PW | sudo -S security lock-keychain
           
       ############################
@@ -115,8 +115,8 @@ jobs:
       - name: Upload dSYMs Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "CodeEdit-${{ env.APP_BUILD }}-dSYMs"
-          path: "${{ RUNNER.TEMP }}/CodeEdit.xcarchive/dSYMs"
+          name: "BCode-${{ env.APP_BUILD }}-dSYMs"
+          path: "${{ RUNNER.TEMP }}/BCode.xcarchive/dSYMs"
           if-no-files-found: error
           # overwrite files for the same build number
           overwrite: true
@@ -131,7 +131,7 @@ jobs:
           # SPARKLE_KEY: Sparkle EdDSA key exported from `generate_keys -x` as plain text
           # SPARKLE_CHANNEL: Seperate dev builds from default channel, to be specified in [SPUUpdaterDelegate allowedChannelsForUpdater:]
           # SPARKLE_DL_PREFIX: Prefix for the URL from where updates will be downloaded
-          # SPARKLE_LINK: CodeEdit Website
+          # SPARKLE_LINK: BCode Website
           #   https://github.com/CodeEditApp/CodeEdit/releases/download/0.0.1-alpha.11/CodeEdit-9113dc5.dmg
           # RELEASE_NOTES_PREFIX: The URL to prefix before an update link:
           #   https://codeedit.app/whats-new/raw/{v0.1.0} -- data in {} is inserted by sparkle
@@ -149,9 +149,9 @@ jobs:
           SPARKLE_ARCHIVE="$RUNNER_TEMP/Sparkle_Archive"
           echo -n "$SPARKLE_KEY" | tee "$RUNNER_TEMP/sparkle_key"
           mkdir "$SPARKLE_ARCHIVE"
-          cp "$RUNNER_TEMP/CodeEdit.dmg" "$SPARKLE_ARCHIVE"
-          SPARKLE_SIG=$("$SPARKLE_BIN/sign_update" --ed-key-file "$RUNNER_TEMP/sparkle_key" "$SPARKLE_ARCHIVE/CodeEdit.dmg" | cut -d\" -f2)
-          echo "<!DOCTYPE>" > "$SPARKLE_ARCHIVE/CodeEdit.html" # Need a blank html doc with the DOCTYPE tag to trick sparkle into loading our remote release notes.
+          cp "$RUNNER_TEMP/BCode.dmg" "$SPARKLE_ARCHIVE"
+          SPARKLE_SIG=$("$SPARKLE_BIN/sign_update" --ed-key-file "$RUNNER_TEMP/sparkle_key" "$SPARKLE_ARCHIVE/BCode.dmg" | cut -d\" -f2)
+          echo "<!DOCTYPE>" > "$SPARKLE_ARCHIVE/BCode.html" # Need a blank html doc with the DOCTYPE tag to trick sparkle into loading our remote release notes.
           "$SPARKLE_BIN/generate_appcast" --ed-key-file "$RUNNER_TEMP/sparkle_key" --download-url-prefix "${{ env.SPARKLE_DL_PREFIX }}/v${{ env.APP_VERSION }}/" --link "$SPARKLE_LINK" --channel "$SPARKLE_CHANNEL" --maximum-deltas 0 "$SPARKLE_ARCHIVE" --release-notes-url-prefix "${{ env.RELEASE_NOTES_PREFIX }}v${{ env.APP_VERSION }}/" --full-release-notes-url "$RELEASE_NOTES_URL"
 
       ############################
@@ -165,7 +165,7 @@ jobs:
         with:
           title: "v${{ env.APP_VERSION }}"
           files: |
-            ${{ RUNNER.TEMP }}/Sparkle_Archive/CodeEdit.dmg
+            ${{ RUNNER.TEMP }}/Sparkle_Archive/BCode.dmg
             ${{ RUNNER.TEMP }}/Sparkle_Archive/appcast.xml
           automatic_release_tag: "v${{ env.APP_VERSION }}"
           prerelease: false

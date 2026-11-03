@@ -1,4 +1,4 @@
-# Contribute to CodeEdit
+# Contribute to b-code
 
 Feel free to join and collaborate on our [Discord Server](https://discord.gg/vChUXVf9Em).
 
@@ -6,7 +6,7 @@ Feel free to join and collaborate on our [Discord Server](https://discord.gg/vCh
 > Please do not submit `localization` related pull requests at this time. 
 > Once we are ready to support more languages we will let you know with a guide on how to contribute here and on our [Discord Server](https://discord.gg/vChUXVf9Em).
 
-## Fork & Clone CodeEdit
+## Fork & Clone b-code
 
 Tap the **"Fork"** button on the top of the site. After forking clone the forked repository to your Mac.
 

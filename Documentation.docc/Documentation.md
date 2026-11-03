@@ -1,4 +1,4 @@
-# ``CodeEdit``
+# ``BCode``
 
 ## Topics
 
@@ -14,14 +14,14 @@
 
 - <doc:App-Window>
 
-### CodeEditExtension
+### BCodeExtension
 
 - ``ExtensionManager``
 - ``FolderMonitor``
 
-### CodeEditUI
+### BCodeUI
 
-- <doc:CodeEditUI>
+- <doc:BCodeUI>
 
 ### CodeFile
 
@@ -40,7 +40,7 @@
 - ``CEWorkspaceFile``
 - ``CEWorkspaceFileManager``
 - ``CodeFileDocument``
-- ``CodeEditDocumentController``
+- ``BCodeDocumentController``
 
 ### Feedback
 
@@ -83,7 +83,7 @@
 
 ### Utils
 
-- ``CodeEditKeychain``
+- ``BCodeKeychain``
 - ``ShellClient``
 - ``FileIcon``
 

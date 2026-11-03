@@ -1,4 +1,4 @@
-# ``CodeEdit/StatusBarView``
+# ``BCode/StatusBarView``
 
 ## Topics
 
