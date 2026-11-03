@@ -9,66 +9,45 @@ import SwiftUI
 import BCSymbols
 import Combine
 
-/// A view that pops up a branch picker.
+/// The title area of the toolbar, like Xcode's: the project's icon and name, with the current status below it.
+///
+/// Clicking the name opens the branch picker; the current branch is in the name's tooltip.
 struct ToolbarBranchPicker: View {
     private weak var workspaceFileManager: CEWorkspaceFileManager?
     private weak var sourceControlManager: SourceControlManager?
+    private let taskNotificationHandler: TaskNotificationHandler?
+    private let projectIcon: NSImage?
 
     @Environment(\.controlActiveState)
     private var controlActive
 
-    @State private var isHovering: Bool = false
-    @State private var displayPopover: Bool = false
     @State private var currentBranch: GitBranch?
 
     /// Initializes the ``ToolbarBranchPicker`` with an instance of a `WorkspaceClient`
-    /// - Parameter workspace: An instance of the current `WorkspaceClient`
+    /// - Parameters:
+    ///   - workspaceFileManager: The file manager of the current workspace.
+    ///   - taskNotificationHandler: Supplies the status shown under the project name.
     init(
-        workspaceFileManager: CEWorkspaceFileManager?
+        workspaceFileManager: CEWorkspaceFileManager?,
+        taskNotificationHandler: TaskNotificationHandler? = nil
     ) {
         self.workspaceFileManager = workspaceFileManager
         self.sourceControlManager = workspaceFileManager?.sourceControlManager
+        self.taskNotificationHandler = taskNotificationHandler
+        self.projectIcon = workspaceFileManager.map {
+            NSWorkspace.shared.icon(forFile: $0.folderUrl.path(percentEncoded: false))
+        }
     }
 
     var body: some View {
         HStack(alignment: .center, spacing: 7) {
-            Group {
-                if currentBranch != nil {
-                    Image(symbol: "branch")
-                } else {
-                    Image(systemName: "folder.fill.badge.gearshape")
+            icon
+            VStack(alignment: .leading, spacing: 1) {
+                titleView
+                if let taskNotificationHandler {
+                    ToolbarStatusView(taskNotificationHandler: taskNotificationHandler)
                 }
             }
-            .foregroundColor(controlActive == .inactive ? inactiveColor : .secondary)
-            .font(.system(size: 14))
-            .imageScale(.medium)
-            .frame(width: 17, height: 17)
-            VStack(alignment: .leading, spacing: 0) {
-                Text(title)
-                    .font(.headline)
-                    .foregroundColor(controlActive == .inactive ? inactiveColor : .primary)
-                    .frame(height: 16)
-                    .help(title)
-                if let currentBranch {
-                    Menu(content: {
-                        if let sourceControlManager = workspaceFileManager?.sourceControlManager {
-                            PopoverView(sourceControlManager: sourceControlManager)
-                        }
-                    }, label: {
-                        Text(currentBranch.name)
-                            .font(.subheadline)
-                            .foregroundColor(controlActive == .inactive ? inactiveColor : .gray)
-                            .frame(height: 11)
-                    })
-                    .menuIndicator(isHovering ? .visible : .hidden)
-                    .buttonStyle(.borderless)
-                    .padding(.leading, -3)
-                    .padding(.bottom, 2)
-                }
-            }
-        }
-        .onHover { active in
-            isHovering = active
         }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { (_) in
             if self.currentBranch != nil {
@@ -90,8 +69,51 @@ struct ToolbarBranchPicker: View {
             }
         }
         .if(.tahoe) {
-            $0.padding(.leading, 10).frame(minWidth: 140)
+            $0.padding(.leading, 10).frame(minWidth: 140, alignment: .leading)
         }
+    }
+
+    @ViewBuilder private var icon: some View {
+        if let projectIcon {
+            Image(nsImage: projectIcon)
+                .resizable()
+                .interpolation(.high)
+                .frame(width: 20, height: 20)
+                .opacity(controlActive == .inactive ? 0.5 : 1.0)
+        } else {
+            Image(systemName: "folder.fill.badge.gearshape")
+                .foregroundColor(controlActive == .inactive ? inactiveColor : .secondary)
+                .font(.system(size: 14))
+                .imageScale(.medium)
+                .frame(width: 17, height: 17)
+        }
+    }
+
+    /// The project name. In a git repository it opens the branch picker, like the subtitle used to.
+    @ViewBuilder private var titleView: some View {
+        if let currentBranch, let sourceControlManager {
+            Menu {
+                PopoverView(sourceControlManager: sourceControlManager)
+            } label: {
+                titleText
+            }
+            .menuStyle(.button)
+            .buttonStyle(.plain)
+            .menuIndicator(.hidden)
+            .fixedSize()
+            .help("\(title) – Branch: \(currentBranch.name)")
+            .accessibilityValue(currentBranch.name)
+        } else {
+            titleText
+                .help(title)
+        }
+    }
+
+    private var titleText: some View {
+        Text(title)
+            .font(.title3.weight(.semibold))
+            .foregroundColor(controlActive == .inactive ? inactiveColor : .primary)
+            .lineLimit(1)
     }
 
     private var inactiveColor: Color {

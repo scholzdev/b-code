@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-/// A view that shows the activity bar and the current status of any executed task
+/// The activity area in the toolbar: the selected task (the scheme) and where it runs (the destination).
 struct ActivityViewer: View {
     @Environment(\.colorScheme)
     var colorScheme
 
     var workspaceFileManager: CEWorkspaceFileManager?
 
-    @ObservedObject var taskNotificationHandler: TaskNotificationHandler
     @ObservedObject var workspaceSettingsManager: CEWorkspaceSettings
 
     // TODO: try to get this from the envrionment
@@ -23,27 +22,20 @@ struct ActivityViewer: View {
     init(
         workspaceFileManager: CEWorkspaceFileManager?,
         workspaceSettingsManager: CEWorkspaceSettings,
-        taskNotificationHandler: TaskNotificationHandler,
         taskManager: TaskManager
     ) {
         self.workspaceFileManager = workspaceFileManager
         self.workspaceSettingsManager = workspaceSettingsManager
-        self.taskNotificationHandler = taskNotificationHandler
         self.taskManager = taskManager
     }
     var body: some View {
         Group {
             if #available(macOS 26, *) {
+                // Compact like Xcode's "scheme › destination" capsule; the status is under the project name.
                 content
-                    .fixedSize(horizontal: false, vertical: false)
+                    .fixedSize(horizontal: true, vertical: false)
                     .padding(5)
-                // TaskNotificationView doesn't have it's own padding
-                // Also this padding seems weird. However, we want the spinning circle to be padded with the same
-                // amount from both the top and bottom, as well as the trailing edge. So despite it not being exactly
-                // the same it *looks* correctly padded
-                    .padding(.trailing, 5)
                     .clipShape(Capsule())
-                    .frame(minWidth: 200)
             } else {
                 content
                     .fixedSize(horizontal: false, vertical: false)
@@ -67,19 +59,14 @@ struct ActivityViewer: View {
     }
 
     @ViewBuilder private var content: some View {
-        // b-code: like Xcode's activity area, "scheme › destination" followed by the status.
-        // The selected task acts as the scheme; the branch picker already shows the project name.
+        // b-code: like Xcode's activity area, "scheme › destination". The selected task acts as the scheme.
+        // The project name and the status are in the title area (`ToolbarBranchPicker`), as in Xcode.
         HStack(spacing: 0) {
             TaskDropDownView(taskManager: taskManager)
 
             if taskManager.selectedTask != nil {
                 DestinationView(taskManager: taskManager)
             }
-
-            Spacer(minLength: 0)
-
-            TaskNotificationView(taskNotificationHandler: taskNotificationHandler)
-                .fixedSize()
         }
     }
 }

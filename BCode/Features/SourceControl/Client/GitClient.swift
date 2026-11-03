@@ -57,7 +57,8 @@ class GitClient {
     /// Runs a git command, it will prepend the command with `cd <directoryURL>;git`,
     /// If you need to run "git checkout", pass "checkout" as the command parameter
     internal func run(_ command: String) async throws -> String {
-        let output = try shellClient.run(generateCommand(command))
+        // b-code: skip what the user's shell startup files print, it would end up in branch names etc.
+        let output = try shellClient.runSkippingStartupOutput(generateCommand(command))
         return try processCommonErrors(output)
     }
 
