@@ -67,13 +67,14 @@ struct ActivityViewer: View {
     }
 
     @ViewBuilder private var content: some View {
+        // b-code: like Xcode's activity area, "scheme › destination" followed by the status.
+        // The selected task acts as the scheme; the branch picker already shows the project name.
         HStack(spacing: 0) {
-            SchemeDropDownView(
-                workspaceSettingsManager: workspaceSettingsManager,
-                workspaceFileManager: workspaceFileManager
-            )
-
             TaskDropDownView(taskManager: taskManager)
+
+            if taskManager.selectedTask != nil {
+                DestinationView(taskManager: taskManager)
+            }
 
             Spacer(minLength: 0)
 

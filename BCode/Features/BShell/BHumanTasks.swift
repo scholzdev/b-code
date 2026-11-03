@@ -44,14 +44,22 @@ enum BHumanTasks {
         ].joined(separator: " && ")
     }
 
+    /// The destination shown next to a `Booster` scheme: the code goes to the robots chosen in the Deploy Dialog.
+    static let robotsDestination = "Robots"
+
     /// One task per generated scheme, named like the scheme. They run in the workspace folder.
     static func tasks() -> [CETask] {
         let booster = configurations.map { configuration in
-            CETask(name: "Booster - \(configuration)", command: boosterCommand(configuration: configuration))
+            CETask(
+                name: "Booster - \(configuration)",
+                target: robotsDestination,
+                command: boosterCommand(configuration: configuration)
+            )
         }
         let simRobot = configurations.map { configuration in
             CETask(
                 name: "SimRobot - \(configuration)",
+                target: DestinationView.defaultDestination,
                 command: compileCommand(target: "SimRobot", configuration: configuration)
             )
         }
