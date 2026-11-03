@@ -63,6 +63,13 @@ final class BHumanTasksTests: XCTestCase {
         XCTAssertEqual(task.command, "Make/macOS/compile SimRobot Release")
     }
 
+    func testBoosterDeploysToRobotsAndSimRobotRunsOnTheMac() {
+        for task in BHumanTasks.tasks() {
+            let expected = task.name.hasPrefix("Booster") ? "Robots" : "My Mac"
+            XCTAssertEqual(task.target, expected, task.name)
+        }
+    }
+
     func testAllTasksAreValidAndRunInTheWorkspaceFolder() {
         for task in BHumanTasks.tasks() {
             XCTAssertFalse(task.isInvalid, task.name)
