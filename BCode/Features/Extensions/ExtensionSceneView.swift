@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CodeEditKit
+import BCKit
 import ExtensionKit
 import ExtensionFoundation
 

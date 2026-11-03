@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import ExtensionFoundation
-import CodeEditKit
+import BCKit
 import ConcurrencyPlus
 
 final class ExtensionManager: ObservableObject {

@@ -6,7 +6,7 @@
 //
 
 import AppKit
-import CodeEditKit
+import BCKit
 import ExtensionFoundation
 
 struct ExtensionInfo: Identifiable, Hashable {

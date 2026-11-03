@@ -25,12 +25,12 @@
 		6C315FC82E05E33D0011BFC5 /* BCSourceEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 6C315FC72E05E33D0011BFC5 /* BCSourceEditor */; };
 		6C66C31329D05CDC00DE9ED2 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 6C66C31229D05CDC00DE9ED2 /* GRDB */; };
 		6C6BD6F429CD142C00235D17 /* CollectionConcurrencyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6C6BD6F329CD142C00235D17 /* CollectionConcurrencyKit */; };
-		6C6BD6F829CD14D100235D17 /* CodeEditKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6C6BD6F729CD14D100235D17 /* CodeEditKit */; };
-		6C6BD6F929CD14D100235D17 /* CodeEditKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 6C6BD6F729CD14D100235D17 /* CodeEditKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		6C6BD6F829CD14D100235D17 /* BCKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6C6BD6F729CD14D100235D17 /* BCKit */; };
+		6C6BD6F929CD14D100235D17 /* BCKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 6C6BD6F729CD14D100235D17 /* BCKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6C73A6D32D4F1E550012D95C /* BCSourceEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 6C73A6D22D4F1E550012D95C /* BCSourceEditor */; };
 		6C76D6D42E15B91E00EF52C3 /* BCSourceEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 6C76D6D32E15B91E00EF52C3 /* BCSourceEditor */; };
 		6C81916B29B41DD300B75C92 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 6C81916A29B41DD300B75C92 /* DequeModule */; };
-		6C85BB402C2105ED00EB5DEF /* CodeEditKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6C85BB3F2C2105ED00EB5DEF /* CodeEditKit */; };
+		6C85BB402C2105ED00EB5DEF /* BCKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6C85BB3F2C2105ED00EB5DEF /* BCKit */; };
 		6C85BB442C210EFD00EB5DEF /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 6C85BB432C210EFD00EB5DEF /* SwiftUIIntrospect */; };
 		6C9DB9E42D55656300ACD86E /* BCSourceEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 6C9DB9E32D55656300ACD86E /* BCSourceEditor */; };
 		6CAAF68A29BC9C2300A1F48A /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -79,7 +79,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6C6BD6F929CD14D100235D17 /* CodeEditKit in Embed Frameworks */,
+				6C6BD6F929CD14D100235D17 /* BCKit in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,7 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				302AD7FF2D8054D500231E16 /* ZIPFoundation in Frameworks */,
-				6C85BB402C2105ED00EB5DEF /* CodeEditKit in Frameworks */,
+				6C85BB402C2105ED00EB5DEF /* BCKit in Frameworks */,
 				6C66C31329D05CDC00DE9ED2 /* GRDB in Frameworks */,
 				58F2EB1E292FB954004A9BDE /* Sparkle in Frameworks */,
 				6C147C4529A329350089B630 /* OrderedCollections in Frameworks */,
@@ -193,7 +193,7 @@
 				2816F594280CF50500DD548B /* BCSymbols in Frameworks */,
 				30CB64942C16CA9100CC8A9E /* LanguageClient in Frameworks */,
 				5EACE6222DF4BF08005E08B8 /* WelcomeWindow in Frameworks */,
-				6C6BD6F829CD14D100235D17 /* CodeEditKit in Frameworks */,
+				6C6BD6F829CD14D100235D17 /* BCKit in Frameworks */,
 				6C0824A12C5C0C9700A0751E /* SwiftTerm in Frameworks */,
 				6C81916B29B41DD300B75C92 /* DequeModule in Frameworks */,
 				6CB94D032CA1205100E8651C /* AsyncAlgorithms in Frameworks */,
@@ -317,11 +317,11 @@
 				6C147C4429A329350089B630 /* OrderedCollections */,
 				6C81916A29B41DD300B75C92 /* DequeModule */,
 				6C6BD6F329CD142C00235D17 /* CollectionConcurrencyKit */,
-				6C6BD6F729CD14D100235D17 /* CodeEditKit */,
+				6C6BD6F729CD14D100235D17 /* BCKit */,
 				6C66C31229D05CDC00DE9ED2 /* GRDB */,
 				6CB4463F2B6DFF3A00539ED0 /* BCSourceEditor */,
 				6C0617D52BDB4432008C9C42 /* LogStream */,
-				6C85BB3F2C2105ED00EB5DEF /* CodeEditKit */,
+				6C85BB3F2C2105ED00EB5DEF /* BCKit */,
 				6C85BB432C210EFD00EB5DEF /* SwiftUIIntrospect */,
 				6CC17B4E2C432AE000834E2C /* BCSourceEditor */,
 				6C0824A02C5C0C9700A0751E /* SwiftTerm */,
@@ -433,7 +433,7 @@
 				6C6BD6F229CD142C00235D17 /* XCRemoteSwiftPackageReference "collectionconcurrencykit" */,
 				6C66C31129D05CC800DE9ED2 /* XCRemoteSwiftPackageReference "GRDB.swift" */,
 				6C0617D42BDB4432008C9C42 /* XCRemoteSwiftPackageReference "LogStream" */,
-				6C85BB3E2C2105ED00EB5DEF /* XCRemoteSwiftPackageReference "CodeEditKit" */,
+				6C85BB3E2C2105ED00EB5DEF /* XCRemoteSwiftPackageReference "BCKit" */,
 				6C85BB422C210EFD00EB5DEF /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				303E88452C276FD100EEA8D9 /* XCRemoteSwiftPackageReference "LanguageClient" */,
 				303E88462C276FD600EEA8D9 /* XCRemoteSwiftPackageReference "LanguageServerProtocol" */,
@@ -1805,12 +1805,12 @@
 				revision = e02b261b67b9f7bb41ec9b0ff687846a73da99a9;
 			};
 		};
-		6C85BB3E2C2105ED00EB5DEF /* XCRemoteSwiftPackageReference "CodeEditKit" */ = {
+		6C85BB3E2C2105ED00EB5DEF /* XCRemoteSwiftPackageReference "BCKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CodeEditApp/CodeEditKit";
+			repositoryURL = "https://github.com/scholzdev/BCKit.git";
 			requirement = {
-				kind = exactVersion;
-				version = 0.1.2;
+				kind = revision;
+				revision = 43bd7d3cec9c29f715dcfc8dac8e883f51d00fb4;
 			};
 		};
 		6C85BB422C210EFD00EB5DEF /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
@@ -1916,9 +1916,9 @@
 			package = 6C6BD6F229CD142C00235D17 /* XCRemoteSwiftPackageReference "collectionconcurrencykit" */;
 			productName = CollectionConcurrencyKit;
 		};
-		6C6BD6F729CD14D100235D17 /* CodeEditKit */ = {
+		6C6BD6F729CD14D100235D17 /* BCKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = CodeEditKit;
+			productName = BCKit;
 		};
 		6C73A6D22D4F1E550012D95C /* BCSourceEditor */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1939,10 +1939,10 @@
 			package = 6C147C4329A329350089B630 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = DequeModule;
 		};
-		6C85BB3F2C2105ED00EB5DEF /* CodeEditKit */ = {
+		6C85BB3F2C2105ED00EB5DEF /* BCKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6C85BB3E2C2105ED00EB5DEF /* XCRemoteSwiftPackageReference "CodeEditKit" */;
-			productName = CodeEditKit;
+			package = 6C85BB3E2C2105ED00EB5DEF /* XCRemoteSwiftPackageReference "BCKit" */;
+			productName = BCKit;
 		};
 		6C85BB432C210EFD00EB5DEF /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
