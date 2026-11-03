@@ -1,4 +1,4 @@
-# ``CodeEdit/TabBarView``
+# ``BCode/TabBarView``
 
 ## Topics
 

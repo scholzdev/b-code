@@ -20,7 +20,7 @@ export LC_CTYPE=en_US.UTF-8
 # - is-ci: include test results in output
 
 set -o pipefail && arch -"${ARCH}" xcodebuild \
-           -scheme CodeEdit \
+           -scheme BCode \
            -destination "platform=OS X,arch=${ARCH}" \
            -skipPackagePluginValidation \
            clean test | xcbeautify --renderer github-actions -q --is-ci

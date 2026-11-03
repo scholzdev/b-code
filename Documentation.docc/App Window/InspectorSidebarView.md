@@ -1,4 +1,4 @@
-# ``CodeEdit/InspectorAreaView``
+# ``BCode/InspectorAreaView``
 
 ## Topics
 

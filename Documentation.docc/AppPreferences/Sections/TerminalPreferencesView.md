@@ -1,4 +1,4 @@
-# ``CodeEdit/TerminalSettingsView``
+# ``BCode/TerminalSettingsView``
 
 ## Topics
 
