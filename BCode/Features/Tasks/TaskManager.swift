@@ -20,9 +20,19 @@ class TaskManager: ObservableObject {
     private var workspaceURL: URL?
     private var settingsListener: AnyCancellable?
 
+    /// Tasks b-code provides itself for a known kind of project. They are not stored in the workspace settings.
+    private let builtInTasks: [CETask]
+
     init(workspaceSettings: CEWorkspaceSettingsData, workspaceURL: URL?) {
         self.workspaceURL = workspaceURL
         self.workspaceSettings = workspaceSettings
+
+        // b-code hook: a B-Human Code Release checkout gets its Xcode schemes as tasks (see `BHumanTasks`).
+        if let workspaceURL, BHumanTasks.isBHumanCheckout(at: workspaceURL) {
+            self.builtInTasks = BHumanTasks.tasks()
+        } else {
+            self.builtInTasks = []
+        }
 
         settingsListener = workspaceSettings.$tasks
             .receive(on: DispatchQueue.main)
@@ -47,8 +57,9 @@ class TaskManager: ObservableObject {
         return nil
     }
 
+    /// The built-in tasks followed by the ones defined in the workspace settings.
     var availableTasks: [CETask] {
-        return workspaceSettings.tasks
+        return builtInTasks + workspaceSettings.tasks
     }
 
     func taskStatus(taskID: UUID) -> CETaskStatus {
@@ -61,7 +72,7 @@ class TaskManager: ObservableObject {
     }
 
     func executeActiveTask() {
-        guard let task = workspaceSettings.tasks.first(where: { $0.id == selectedTaskID }) else { return }
+        guard let task = availableTasks.first(where: { $0.id == selectedTaskID }) else { return }
         Task {
             await runTask(task: task)
         }
