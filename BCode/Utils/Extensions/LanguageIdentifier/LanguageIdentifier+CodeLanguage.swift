@@ -6,7 +6,7 @@
 //
 
 import LanguageServerProtocol
-import CodeEditLanguages
+import BCLanguages
 
 extension CodeLanguage {
     var lspLanguage: LanguageIdentifier? {

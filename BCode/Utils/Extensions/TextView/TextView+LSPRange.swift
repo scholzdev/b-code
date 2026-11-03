@@ -6,7 +6,7 @@
 //
 
 import AppKit
-import CodeEditTextView
+import BCTextView
 import LanguageServerProtocol
 
 extension TextView {

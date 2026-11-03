@@ -7,8 +7,8 @@
 
 import AppKit
 import AsyncAlgorithms
-import CodeEditSourceEditor
-import CodeEditTextView
+import BCSourceEditor
+import BCTextView
 import LanguageServerProtocol
 
 /// This content coordinator forwards content notifications from the editor's text storage to a language service.

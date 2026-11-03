@@ -8,8 +8,8 @@
 import Foundation
 import AppKit
 import Combine
-import CodeEditTextView
-import CodeEditSourceEditor
+import BCTextView
+import BCSourceEditor
 
 /// A single instance of an editor in a group with a published ``EditorInstance/cursorPositions`` variable to publish
 /// the user's current location in a file.

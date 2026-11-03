@@ -6,8 +6,8 @@
 //
 
 import XCTest
-import CodeEditTextView
-import CodeEditSourceEditor
+import BCTextView
+import BCSourceEditor
 import LanguageClient
 import LanguageServerProtocol
 

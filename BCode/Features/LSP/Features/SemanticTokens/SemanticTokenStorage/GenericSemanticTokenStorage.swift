@@ -7,7 +7,7 @@
 
 import Foundation
 import LanguageServerProtocol
-import CodeEditSourceEditor
+import BCSourceEditor
 
 /// Defines a protocol for an object to provide storage for semantic tokens.
 /// 

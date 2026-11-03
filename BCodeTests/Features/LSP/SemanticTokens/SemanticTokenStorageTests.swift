@@ -7,7 +7,7 @@
 
 import Foundation
 import Testing
-import CodeEditSourceEditor
+import BCSourceEditor
 import LanguageServerProtocol
 @testable import BCode
 

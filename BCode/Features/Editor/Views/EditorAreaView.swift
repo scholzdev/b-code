@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CodeEditTextView
+import BCTextView
 import UniformTypeIdentifiers
 
 struct EditorAreaView: View {

@@ -8,7 +8,7 @@
 @testable import BCode
 import Testing
 import Foundation
-import CodeEditTextView
+import BCTextView
 
 @MainActor
 @Suite

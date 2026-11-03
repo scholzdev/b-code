@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import CodeEditSymbols
-import CodeEditSourceEditor
+import BCSymbols
+import BCSourceEditor
 import OSLog
 
 @MainActor

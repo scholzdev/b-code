@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CodeEditSymbols
+import BCSymbols
 import Combine
 
 /// A view that pops up a branch picker.

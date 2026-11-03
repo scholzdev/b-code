@@ -6,9 +6,9 @@
 //
 
 import XCTest
-import CodeEditTextView
-import CodeEditSourceEditor
-import CodeEditLanguages
+import BCTextView
+import BCSourceEditor
+import BCLanguages
 import LanguageClient
 import LanguageServerProtocol
 

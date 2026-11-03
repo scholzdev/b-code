@@ -7,8 +7,8 @@
 
 import LanguageClient
 import LanguageServerProtocol
-import CodeEditSourceEditor
-import CodeEditTextView
+import BCSourceEditor
+import BCTextView
 
 // swiftlint:disable line_length
 /// Creates a mapping from a language server's semantic token options to a format readable by b-code.
